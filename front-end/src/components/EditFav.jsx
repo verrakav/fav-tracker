@@ -3,6 +3,7 @@ import Button from "./Button";
 export default function EditFav({selected, setName, setType, setNotes, onShowEdit}) {
   const handleSubmit = e => {
     e.preventDefault();
+
     onShowEdit();
   };
 

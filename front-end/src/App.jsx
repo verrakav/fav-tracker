@@ -26,7 +26,7 @@ export default function App() {
 
   const handleSelect = fav => {
     setSelected(cur => cur?.id === fav.id && fav);
-    setShowEdit(true);
+    setShowEdit(showEdit => !showEdit);
     setShowAdd(false);
   };
 
@@ -36,8 +36,11 @@ export default function App() {
 
   const handleAddFav = fav => setFavs(favs => [...favs, fav]);
 
-  const handleDeleteFav = fav =>
+  const handleDeleteFav = fav => {
     setFavs(favs => favs.filter(fav => fav.name !== selected.name));
+    setShowEdit(false);
+    setShowAdd(false);
+  };
 
   return (
     <div className="app">
