@@ -1,79 +1,52 @@
 import "./App.css";
+import FavsList from "./components/FavsList";
+import AddFav from "./components/AddFav";
+import EditFav from "./components/EditFav";
+import {useState} from "react";
 import {initialFavs} from "./dummyData";
 
 export default function App() {
+  //states for showing/hiding side forms
+  const [showAdd, setShowAdd] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  //
+  const [selected, setSelected] = useState(null);
+  //
+  const [favs, setFavs] = useState(initialFavs);
+
+  //handlers
+  const handleShowAdd = () => setShowAdd(showAdd => !showAdd);
+
+  const handleSelect = fav => {
+    setSelected(cur => (cur?.id === fav.id ? null : fav));
+    setShowAdd(false);
+    console.log("works");
+  };
+
+  const handleShowEdit = fav => {
+    setShowEdit(showEdit => !showEdit);
+    handleSelect(fav);
+  };
+
+  const handleAddFav = fav => setFavs(favs => [...favs, fav]);
+
+  const handleDeleteFav = fav =>
+    setFavs(favs => favs.filter(fav => fav.name !== selected.name));
+
   return (
-    <div>
-      <h1 className="banner">Fav Tracker</h1>
-      <div className="app">
-        <FavsList />
-        <AddFav />
-        <EditFav />
+    <div className="app">
+      <h2 className="app-banner">Fav Tracker</h2>
+      <div className="app-main">
+        <FavsList
+          favs={favs}
+          onShow={handleShowAdd}
+          onShowEdit={handleShowEdit}
+          onDelete={handleDeleteFav}
+          onSelect={handleSelect}
+        />
+        {showAdd && <AddFav onAdd={handleAddFav} />}
+        {showEdit && <EditFav selected={selected} favs={favs} />}
       </div>
     </div>
-  );
-}
-
-///LIST///
-function FavsList() {
-  return (
-    <div className="favs-container">
-      <h1 className="heading">Your Favs</h1>
-      {initialFavs.length > 0 ? (
-        <ul className="favs-list">
-          {initialFavs.map((fav, idx) => (
-            <li className="favs-item" key={fav[idx]}>
-              <h3>{fav.name}</h3>
-              <span>{fav.type}</span>
-              <p>{fav.notes}</p> <Button>select</Button>
-            </li>
-          ))}
-          <Button>Add a fav!</Button>
-        </ul>
-      ) : (
-        "Create your fav list"
-      )}
-    </div>
-  );
-}
-
-///ADD ITEM FORM///
-function AddFav() {
-  return (
-    <form className="add-fav">
-      <h1>Add a new fav</h1>
-      <label>Name</label>
-      <input type="text" />
-      <label>Type</label>
-      <input type="text" />
-      <label>Notes?</label>
-      <input type="text" />
-      <Button>ADD!</Button>
-    </form>
-  );
-}
-
-///EDIT ITEM FORM///
-function EditFav() {
-  return (
-    <form className="edit-fav">
-      <h1>Edit your fav</h1>
-      <label>New name</label>
-      <input type="text" />
-      <label>New type</label>
-      <input type="text" />
-      <label>New note</label>
-      <input type="text" />
-      <Button>EDIT!</Button>
-    </form>
-  );
-}
-
-///REUSABLES///
-function Button({children, onClick}) {
-  return (
-    <button className="button" onClick={onClick}>
-      {children}
-    </button>
   );
 }
