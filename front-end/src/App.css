@@ -1,8 +1,14 @@
+body {
+  background-color: #606c38;
+}
 .app {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1;
   font-weight: 400;
-  margin: 0.5rem;
+  margin-top: -1rem;
+  background-color: #f3efe0;
+  height: 95vh;
+  color: #283618;
 }
 
 .app-banner {
@@ -35,18 +41,21 @@
 }
 
 .favs-container {
+  max-width: 70%;
   margin-left: 2rem;
   margin-right: 2rem;
   display: flex;
   flex-direction: column;
-  border: solid salmon;
+  border: solid #606c38;
+  border-radius: 1rem;
 }
 
 .favs-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: space-around;
+  gap: 0.5rem;
+  justify-content: flex-start;
   align-items: baseline;
   list-style: none;
   margin-top: 0;
@@ -55,8 +64,10 @@
 
 .favs-item {
   display: flex;
+  align-items: baseline;
   padding: 0.75rem;
-  border: solid teal;
+  border: solid #606c38;
+  border-radius: 1rem;
 }
 
 .item-name {
@@ -67,7 +78,7 @@
 
 .type {
   display: flex;
-  color: red;
+  color: #e79940;
   line-height: 0.5;
   font-weight: 300;
   font-size: 0.75rem;
@@ -78,21 +89,25 @@
   padding-right: 0.5rem;
   font-weight: 300;
   font-size: 1rem;
+  margin: 0.5rem;
 }
 
 /* ADD NEW FAV FORM */
 .add-fav,
 .edit-fav {
+  max-width: 20%;
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  border: solid #646cff;
+  border: solid #606c38;
+  border-radius: 1rem;
 }
 
 /* REUSABLES */
 .heading {
   align-self: center;
   margin-bottom: 0;
+  color: #283618;
 }
 
 label {
@@ -101,6 +116,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: #283618;
 }
 
 .button {
@@ -113,9 +129,11 @@ label {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: #fefae0;
+  background-color: #bc6c25;
 }
 .button:hover {
-  border-color: #646cff;
+  color: #fefae0;
 }
 .button:focus,
 .button:focus-visible {
@@ -128,11 +146,12 @@ label {
 }
 
 .btn-item {
-  color: #646cff;
+  color: #fefae0;
   margin: 0.25rem;
   font-size: 0.75rem;
   font-weight: 400;
   font-family: inherit;
+  background-color: #283618;
 }
 
 .mgt-bg {
