@@ -13,19 +13,25 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   //
   const [favs, setFavs] = useState(initialFavs);
+  //controlled inputs
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [notes, setNotes] = useState("");
 
   //handlers
-  const handleShowAdd = () => setShowAdd(showAdd => !showAdd);
+  const handleShowAdd = () => {
+    setShowAdd(showAdd => !showAdd);
+    setShowEdit(false);
+  };
 
   const handleSelect = fav => {
-    setSelected(cur => (cur?.id === fav.id ? null : fav));
+    setSelected(cur => cur?.id === fav.id && fav);
+    setShowEdit(true);
     setShowAdd(false);
-    console.log("works");
   };
 
   const handleShowEdit = fav => {
     setShowEdit(showEdit => !showEdit);
-    handleSelect(fav);
   };
 
   const handleAddFav = fav => setFavs(favs => [...favs, fav]);
@@ -44,8 +50,30 @@ export default function App() {
           onDelete={handleDeleteFav}
           onSelect={handleSelect}
         />
-        {showAdd && <AddFav onAdd={handleAddFav} />}
-        {showEdit && <EditFav selected={selected} favs={favs} />}
+        {showAdd && (
+          <AddFav
+            onAdd={handleAddFav}
+            name={name}
+            type={type}
+            notes={notes}
+            setName={setName}
+            setType={setType}
+            setNotes={setNotes}
+          />
+        )}
+        {showEdit && (
+          <EditFav
+            selected={selected}
+            favs={favs}
+            name={name}
+            type={type}
+            notes={notes}
+            setName={setName}
+            setType={setType}
+            setNotes={setNotes}
+            onShowEdit={handleShowEdit}
+          />
+        )}
       </div>
     </div>
   );

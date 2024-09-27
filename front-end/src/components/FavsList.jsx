@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-export default function FavsList({onShow, onShowEdit, onDelete, favs}) {
+export default function FavsList({onShow, onSelect, onDelete, favs}) {
   return (
     <div className="favs-container">
       <h2 className="heading">Your Favs</h2>
@@ -13,7 +13,7 @@ export default function FavsList({onShow, onShowEdit, onDelete, favs}) {
               </h3>
 
               <p className="description">{fav.notes}</p>
-              <Button styled={"btn-item"} onClick={onShowEdit}>
+              <Button styled={"btn-item"} onClick={() => onSelect(fav)}>
                 select
               </Button>
               <Button styled={"btn-item"} onClick={onDelete}>

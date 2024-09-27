@@ -1,12 +1,14 @@
 import Button from "./Button";
-import {useState} from "react";
 
-export default function AddFav({onAdd}) {
-  //controlled inputs
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [notes, setNotes] = useState("");
-
+export default function AddFav({
+  onAdd,
+  name,
+  type,
+  notes,
+  setName,
+  setType,
+  setNotes
+}) {
   const handleSubmit = e => {
     e.preventDefault();
 
